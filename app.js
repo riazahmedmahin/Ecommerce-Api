@@ -25,8 +25,6 @@ app.use(xss());
 app.use(hpp());
 
 
-
-
 // Rate Limiter
 const limiter = rateLimit(rateLimitConfig);
 app.use(limiter);
