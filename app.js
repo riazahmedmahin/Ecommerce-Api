@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware
 app.use(cors());
 app.use(helmet());
-app.use(express.json()); // To handle JSON payloads
+app.use(express.json()); 
 app.use(cookieParser());
 app.use(mongoSanitize());
 app.use(xss());
