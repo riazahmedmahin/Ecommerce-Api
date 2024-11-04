@@ -14,6 +14,6 @@ const DataSchema= new mongoose.Schema(
     }
 )
 
-const ProducSliderModel = mongoose.model('productsliders',DataSchema)
+const ProductSliderModel = mongoose.model('productsliders',DataSchema)
 
-export default ProducSliderModel;
+export default ProductSliderModel;
