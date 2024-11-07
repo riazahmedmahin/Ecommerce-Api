@@ -10,7 +10,6 @@ const DataSchema= new mongoose.Schema(
         versionKey:false
     }
 )
-
 const BrandModel = mongoose.model('brands',DataSchema)
 
 export default BrandModel;
