@@ -9,8 +9,7 @@ const DataSchema= new mongoose.Schema(
         fail_url:{type: String,required: true},
         cancle_url:{type: String,required: true},
         init_url:{type: String,required: true},
-        inp_url:{type: String,required: true},
-        
+        inp_url:{type: String,required: true}, 
     },
     {
         timestamps:true,
