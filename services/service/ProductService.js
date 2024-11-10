@@ -1,22 +1,49 @@
-import BrandModel from "../models/BrandModel"
-import CategoryModel from "../models/CategoryModel"
-import ProductModel from "../models/ProductModel"
-import ProductDetailModel from "../models/ProductDetailModel"
-import ProductSliderModel from "../models/ProductSliderModel"
-import ReviewModel from "../models/ReviewModel"
+import BrandModel from "../models/BrandModel.js"
+import CategoryModel from "../models/CategoryModel.js"
+import ProductModel from "../models/ProductModel.js"
+import ProductDetailModel from "../models/ProductDetailModel.js"
+import ProductSliderModel from "../models/ProductSliderModel.js"
+import ReviewModel from "../models/ReviewModel.js"
 
 
-export const BrandListService = async (req, res) => {
+export const BrandListService = async () => {
+    try{
+
+        let data=await BrandModel.find();
+        return {status:"Success",data:data}
+    }
+    catch(e){
+        return {status:"fail",data:e}.toSring()
+
+    }
 
 };
 
 
-export const CategoryListService = async (req, res) => {
+export const CategoryListService = async () => {
+    try{
+
+        let data=await CategoryModel.find();
+        return {status:"Success",data:data}
+    }
+    catch(e){
+        return {status:"fail",data:e}.toSring()
+
+    }
 
 };
 
 
-export const SliderListService = async (req, res) => {
+export const SliderListService = async () => {
+    try{
+
+        let data=await ProductSliderModel.find();
+        return {status:"Success",data:data}
+    }
+    catch(e){
+        return {status:"fail",data:e}.toSring()
+
+    }
 
 };
 
