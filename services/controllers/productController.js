@@ -20,6 +20,10 @@ import ProductDetailModel from "../models/ProductDetailModel.js"
 import ProductSliderModel from "../models/ProductSliderModel.js"
 import ReviewModel from "../models/ReviewModel.js"
 
+import mongoose from 'mongoose';
+
+const { ObjectId } = mongoose.Types;
+
 
 export const ProductBrandList = async (req, res) => {
     try {
@@ -35,7 +39,8 @@ export const ProductCategoryList = async (req, res) => {
     try {
         let data = await CategoryModel.find();
         return res.status(200).json({ status: "Success", data: data });
-    } catch (e) {
+    } 
+    catch (e) {
         return res.json({ status: "Fail", data: e.toString() });
     }
 
@@ -45,14 +50,61 @@ export const ProductSliderList = async (req, res) => {
     try {
         let data = await ProductSliderModel.find();
         return res.status(200).json({ status: "Success", data: data });
-    } catch (e) {
+    } 
+    catch (e) {
         return res.json({ status: "Fail", data: e.toString() });
     }
 
 };
 
 export const ProductListByBrand = async (req, res) => {
+    try {
 
+        let BrandId = new ObjectId(req.params.BrandId);
+        let MatchStage = { $match: { brandID: BrandId } };
+        let JoinWithBrandStage = {
+            $lookup: {
+                from: "brands",
+                localField: "brandID",
+                foreignField: "_id",
+                as: "brand",
+            },
+        };
+        let JoinWithCategoryStage = {
+            $lookup: {
+                from: "categories",
+                localField: "categoryID",
+                foreignField: "_id",
+                as: "category",
+            },
+        };
+        let UnwindBrandStage = { $unwind: "$brand" };
+        let UnwindCategoryStage = { $unwind: "$category" };
+        let ProjectionStage = {
+            $project: {
+                "brand._id": 0,
+                "category._id": 0,
+                categoryID: 0,
+                brandID: 0,
+            },
+        };
+        
+        let data = await ProductModel.aggregate([
+            MatchStage,
+            JoinWithBrandStage,
+            JoinWithCategoryStage,
+            UnwindBrandStage,
+            UnwindCategoryStage,
+            ProjectionStage,
+        ]);
+        
+        return res.status(200).json({ status: "Success", data: data });
+    } 
+    catch (e) {
+       
+        return res.status(500).json({ status: "Fail", data: e.toString() });
+    }
+      
 };
 
 export const ProductListByCategory = async (req, res) => {
