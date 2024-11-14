@@ -204,6 +204,48 @@ export const ProductListByRemark = async (req, res) => {
 
 
 export const ProductListBySimilier = async (req, res) => {
+    try{
+        let CategoryID = new ObjectId(req.params.CategoryID)
+        let matchStage = {$match :{categoryID:CategoryID}}
+        let limiteStage = {$limit : 10}
+    
+        let JoinWithBrandStage = {
+            $lookup: {
+                from: "brands",
+                localField: "brandID",
+                foreignField: "_id",
+                as: "brand",
+            },
+        };
+        let JoinWithCategoryStage = {
+            $lookup: {
+                from: "categories",
+                localField: "categoryID",
+                foreignField: "_id",
+                as: "category",
+            },
+        };
+        let UnwindBrandStage = { $unwind: "$brand" };
+        let UnwindCategoryStage = { $unwind: "$category" };
+        let ProjectionStage = {
+            $project: {
+                "brand._id": 0,
+                "category._id": 0,
+                categoryID: 0,
+                brandID: 0,
+            },
+        };
+        let data = await ProductModel.aggregate([
+            matchStage,limiteStage,JoinWithBrandStage,JoinWithCategoryStage,
+            UnwindBrandStage,UnwindCategoryStage,ProjectionStage
+        ])
+        return res.status(200).json({ status: "Success", data: data });
+
+    }
+    catch(e){
+        return res.status(500).json({ status: "Fail", data: e.toString() });
+
+    }
 
 };
 
