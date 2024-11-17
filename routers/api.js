@@ -13,7 +13,7 @@ router.get("/ProductListByCategory/:CategoryID", ProductController.ProductListBy
 router.get("/ProductListBySimilier/:CategoryID", ProductController.ProductListBySimilier);
 router.get("/ProductListByKeyword/:Keyword", ProductController.ProductListByKeyword);
 router.get("/ProductListByRemark/:Remark", ProductController.ProductListByRemark);
-router.get("/ProductDeatils/:ProductId", ProductController.ProductDeatils);
-router.get("/ProductReviewList/:ProductId", ProductController.ProductReviewList);
+router.get("/ProductDeatils/:ProductID", ProductController.ProductDeatils);
+router.get("/ProductReviewList/:ProductID", ProductController.ProductReviewList);
 
 export default router; 
