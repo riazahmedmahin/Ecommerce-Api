@@ -2,6 +2,7 @@
 import express from "express";
 import * as ProductController from "../services/controllers/productController.js";
 import * as UserController from "../services/controllers/UserController.js";
+import  auth from "../services/middleware/auth.js";
 
 const router = express.Router();
 
@@ -20,5 +21,9 @@ router.get("/ProductReviewList/:ProductID", ProductController.ProductReviewList)
 
 // USER
 router.get("/UserOtp/:email", UserController.UserOtp);
+router.get("/VerityOTP/:email/:otp", UserController.VerifyOTP);
+router.get("/Logout",auth,UserController.Logout);
+
+
 
 export default router; 
