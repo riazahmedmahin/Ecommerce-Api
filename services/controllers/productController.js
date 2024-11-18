@@ -312,6 +312,28 @@ export const ProductListByKeyword = async (req, res) => {
 
 
 export const ProductReviewList = async (req, res) => {
+    try{
+        let ProductID = new ObjectId(req.params.ProductID);
+        let matchStage = { $match: { productID: ProductID } };
+        let JoinProfileStage = {
+            $lookup: {
+                from: "profiles",
+                localField: "userID",
+                foreignField: "userID",
+                as: "profile",
+            },
+        };
+        let data = await ReviewModel.aggregate([
+            matchStage,JoinProfileStage
+           
+        ]);
+        return res.status(200).json({ status: "Success", data });
+
+    }
+    catch(e){
+        return res.status(500).json({ status: "Fail", data: e.toString() });
+
+    }
 
 };
 
