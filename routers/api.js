@@ -21,8 +21,11 @@ router.get("/ProductReviewList/:ProductID", ProductController.ProductReviewList)
 
 // USER
 router.get("/UserOtp/:email", UserController.UserOtp);
-router.get("/VerityOTP/:email/:otp", UserController.VerifyOTP);
+router.get("/VerifyLogin/:email/:otp", UserController.VerifyLogin);
 router.get("/Logout",auth,UserController.Logout);
+router.post("/CreateProfile",auth,UserController.CreateProfile);
+router.get("/ReadProfile",auth,UserController.ReadProfile);
+
 
 
 
