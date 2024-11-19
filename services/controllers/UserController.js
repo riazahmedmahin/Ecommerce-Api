@@ -79,17 +79,7 @@ export const Logout = (req, res) => {
 
 export const CreateProfile = async (req, res) => {
     try {
-        const user_id = req.headers.user_id;
-        if (!user_id) {
-            return res.status(401).json({ status: "fail", message: "Unauthorized: Missing user_id in headers" });
-        }
-
-        // Check if user exists
-        const userExists = await UserModel.findById(user_id);
-        if (!userExists) {
-            return res.status(401).json({ status: "fail", message: "Unauthorized: User not found" });
-        }
-
+        let user_id = req.headers.user_id;
         let reqbody = req.body;
         reqbody.userID = user_id;
 

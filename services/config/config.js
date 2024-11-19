@@ -2,7 +2,7 @@
 export const PORT = 3030;
 export const DATABASE= 'mongodb+srv://riazahmedmahin:mahin60@cluster0.ihs08.mongodb.net/EcommerceApi?retryWrites=true&w=majority&appName=Cluster0'
 export const JWT_KEY="ABC123";
-export const JWT_EXPIRE_TIME = 30*24*60*60;
+export const JWT_EXPIRE_TIME = '1h'
 
 export const EMAIL_HOST="mail.teamrabbil.com"
 export const EMAIL_PORT=25

@@ -20,7 +20,7 @@ export const SendEmail = async (EmailTo,EmailText,EmailSubject)=>{
        },)
 
        let mailOptions={
-        from:'TaskApi<info@teamrabbil.com>',
+        from:'Ecommerce<info@teamrabbil.com>',
         to:EmailTo,
         subject:EmailSubject,
         text:EmailText
